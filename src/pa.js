@@ -7,8 +7,8 @@ var
     doc=window.document;
 
     modules=[
-        {name:"jQuery",src:"../src/jQuery-1.9.1.js",require:["c-base"]},
-        {name:"c-base",src:"../src/test.css"}
+        {name:"jQuery",src:"../src/jQuery-1.9.1.js"},
+        {name:"c-test",src:"../src/test.css"}
     ],
     mLoaded=[],mLoading=[],mLoadingActions=[],
 
@@ -50,17 +50,17 @@ pa.debug=function(what){
     console.log(what);
 }
 
-pa.require=function(modList,callBack){
+pa.require=function(modList,callBack,timeout){
 
     modList=modList || [];
     callBack=callBack || function(){};
+    timeout=timeout||1;
 
     var isComplete=true,
-
-    jsSelf = (function() {
-        var files = doc.getElementsByTagName('script');
-        return files[files.length - 1];
-    })();
+        jsSelf = (function() {
+            var files = doc.getElementsByTagName('script');
+            return files[files.length - 1];
+        })();
 
 
 
@@ -83,14 +83,10 @@ pa.require=function(modList,callBack){
         return _isLoad;
     }
     function loadMod(modName){
-
-        alert(modName);
-
-        mLoadingActions.push({name:modName, modules:modList,fn:callBack});
-
         var _mod=getMod(modName),
             _type="",
-            _node=null;
+            _node=null,
+            _return=false;
 
         if(_mod){
             _type=_mod.src.toLowerCase().split(/\./).pop().replace(/[\?#].*/,'');
@@ -98,15 +94,17 @@ pa.require=function(modList,callBack){
             return;
         }
 
-        if(typeof( _mod.require)=="undefined"){return;}
+        _mod.require=_mod.require||[];
         pa.each(_mod.require,function(mod){
             if(!isLoad(mod)){
-                pa.require([mod],function(){pa.require[mod]});
-                return;
+                pa.require([mod],function(){pa.require([modName],callBack)});
+                _return=true;
             }
         });
+        if(_return){return;}
 
         mLoading.push(modName);
+        mLoadingActions.push({ modules:modList,fn:callBack});
 
         if(_type==="css"){
             _node=doc.createElement('link');
@@ -138,19 +136,20 @@ pa.require=function(modList,callBack){
                     }
                 }
             });
+            pa.debug(mLoadingActions);
             pa.each(mLoadingActions,function(action,i){
+                var _i=i;
                 pa.each(action.modules,function(mod,i){
                     if(mod===modName){
                         action.modules.splice(i,1);
                         if(!action.modules.length){
-                            action.fn();
+                            mLoadingActions.splice(_i,1);
+                            setTimeout(callBack,timeout);
                         }
                     }
                 })
             });
         }
-
-
 
     }
     function getMod(modName){
@@ -167,10 +166,10 @@ window.pa=window._=pa;
 
 var a=_([1,1]);
 var b=_(1);
-_.require(["jQuery"],function(){
-    alert("jQ is loading");
+_.require(["jQuery","c-base"],function(){
+    _.debug("jQ is loading ready");
 });
-// _.require(["jQuery"],function(){
-//     alert("loaded");
-// });
+_.require(["c-test"],function(){
+    _.debug("cb already loaded");
+});
 
