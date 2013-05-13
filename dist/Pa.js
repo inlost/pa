@@ -1,3 +1,6 @@
+/*! Pa - v1.0.1 - 2013-05-13
+* https://github.com/inlost/pa
+* Copyright (c) 2013 inlost; Licensed MIT */
 (function(window,undefined){
 
 var
@@ -7,12 +10,8 @@ var
     doc=window.document,
 
     modules=[
-        {name:"unitTest",src:"../test/pa_test.js",require:["Qunit"]},
-
-        {name:"Qunit",src:"../libs/qunit/qunit.js",require:["jQuery","Qunit_style"]},
-        {name:"Qunit_style",src:"../libs/qunit/qunit.css"},
-
-        {name:"jQuery",src:"../libs/jquery/jQuery.js"}
+        {name:"jQuery",src:"../libs/jquery/jQuery-1.9.1.js"},
+        {name:"c-test",src:"../test/test.css"}
     ],
     mLoaded=[],mLoading=[],mLoadingActions=[],
 
@@ -55,9 +54,10 @@ pa.debug=function(what){
     console.log(what);
 };
 
-pa.require=function(modList,callBack){
+pa.require=function(modList,callBack,timeout){
     modList=modList || [];
     callBack=callBack || function(){};
+    timeout=timeout||1;
 
     var isComplete=true,
         jsSelf = (function() {
@@ -86,8 +86,7 @@ pa.require=function(modList,callBack){
         var _mod=getMod(modName),
             _type="",
             _node=null,
-            _return=false,
-            _isActList=false;
+            _return=false;
 
         if(_mod){
             _type=_mod.src.toLowerCase().split(/\./).pop().replace(/[\?#].*/,'');
@@ -98,18 +97,16 @@ pa.require=function(modList,callBack){
         _mod.require=_mod.require||[];
         pa.each(_mod.require,function(mod){
             if(!isLoad(mod)){
-                pa.require([mod],function(){pa.require([modName],callBack);},1);
+                pa.require([mod],function(){pa.require([modName],callBack);},0);
                 _return=true;
             }
         });
         if(_return){return;}
 
         mLoading.push(modName);
-        pa.each(mLoadingActions,function(action){
-            //TODO
-            //去重
-        });
-        mLoadingActions.push({ modules:modList,fn:callBack});
+        if(timeout!==0){
+            mLoadingActions.push({ modules:modList,fn:callBack});
+        }
 
         if(_type==="css"){
             _node=doc.createElement('link');
@@ -148,7 +145,7 @@ pa.require=function(modList,callBack){
                         action.modules.splice(i,1);
                         if(!action.modules.length){
                             mLoadingActions.splice(_i,1);
-                            callBack();
+                            setTimeout(callBack,timeout);
                         }
                     }
                 });
@@ -167,3 +164,12 @@ pa.require=function(modList,callBack){
 window.pa=window._=pa;
 
 })(window);
+
+var _=window.pa;
+_.require(["jQuery","c-test"],function(){
+    _.debug("jQ is loading ready");
+});
+_.require(["c-test"],function(){
+    _.debug("cb already loaded");
+});
+

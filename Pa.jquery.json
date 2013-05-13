@@ -1,0 +1,27 @@
+{
+  "name": "Pa",
+  "title": "Pa",
+  "description": "Pa是平安的简称，是中国平安金融科技研发中心的轻量级前端类库",
+  "version": "1.0.1",
+  "homepage": "https://github.com/inlost/pa",
+  "author": {
+    "name": "inlost",
+    "email": "sailflyer@gmail.com",
+    "url": "inlost.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/inlost/pa.git"
+  },
+  "bugs": "https://github.com/inlost/pa/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/inlost/pa/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}
