@@ -4,16 +4,13 @@
   <meta charset="utf-8">
   <title>Pa Test Suite</title>
   <!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
-
+   <script src="../libs/jquery/jquery.js"></script>
   <!-- Load local QUnit. -->
-
+  <link rel="stylesheet" type="text/css" href="../libs/qunit/qunit.css" />
+   <script src="../libs/qunit/qunit.js"></script>
   <!-- Load local lib and tests. -->
   <script src="../src/Pa.js"></script>
-  <script>
-	_.require(["unitTest"],function(){
-		console.log("testLoadOk");
-	});
-  </script>
+  <script src="Pa_test.js"></script>
 
 </head>
 <body>

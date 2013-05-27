@@ -86,8 +86,7 @@ pa.require=function(modList,callBack){
         var _mod=getMod(modName),
             _type="",
             _node=null,
-            _return=false,
-            _isActList=false;
+            _return=false;
 
         if(_mod){
             _type=_mod.src.toLowerCase().split(/\./).pop().replace(/[\?#].*/,'');
@@ -108,6 +107,7 @@ pa.require=function(modList,callBack){
         pa.each(mLoadingActions,function(action){
             //TODO
             //去重
+            action=action;
         });
         mLoadingActions.push({ modules:modList,fn:callBack});
 

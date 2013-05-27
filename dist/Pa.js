@@ -1,4 +1,4 @@
-/*! Pa - v1.0.1 - 2013-05-13
+/*! Pa - v1.0.1 - 2013-05-27
 * https://github.com/inlost/pa
 * Copyright (c) 2013 inlost; Licensed MIT */
 (function(window,undefined){
@@ -10,8 +10,12 @@ var
     doc=window.document,
 
     modules=[
-        {name:"jQuery",src:"../libs/jquery/jQuery-1.9.1.js"},
-        {name:"c-test",src:"../test/test.css"}
+        {name:"unitTest",src:"../test/pa_test.js",require:["Qunit"]},
+
+        {name:"Qunit",src:"../libs/qunit/qunit.js",require:["jQuery","Qunit_style"]},
+        {name:"Qunit_style",src:"../libs/qunit/qunit.css"},
+
+        {name:"jQuery",src:"../libs/jquery/jQuery.js"}
     ],
     mLoaded=[],mLoading=[],mLoadingActions=[],
 
@@ -54,10 +58,9 @@ pa.debug=function(what){
     console.log(what);
 };
 
-pa.require=function(modList,callBack,timeout){
+pa.require=function(modList,callBack){
     modList=modList || [];
     callBack=callBack || function(){};
-    timeout=timeout||1;
 
     var isComplete=true,
         jsSelf = (function() {
@@ -97,16 +100,19 @@ pa.require=function(modList,callBack,timeout){
         _mod.require=_mod.require||[];
         pa.each(_mod.require,function(mod){
             if(!isLoad(mod)){
-                pa.require([mod],function(){pa.require([modName],callBack);},0);
+                pa.require([mod],function(){pa.require([modName],callBack);},1);
                 _return=true;
             }
         });
         if(_return){return;}
 
         mLoading.push(modName);
-        if(timeout!==0){
-            mLoadingActions.push({ modules:modList,fn:callBack});
-        }
+        pa.each(mLoadingActions,function(action){
+            //TODO
+            //去重
+            action=action;
+        });
+        mLoadingActions.push({ modules:modList,fn:callBack});
 
         if(_type==="css"){
             _node=doc.createElement('link');
@@ -145,7 +151,7 @@ pa.require=function(modList,callBack,timeout){
                         action.modules.splice(i,1);
                         if(!action.modules.length){
                             mLoadingActions.splice(_i,1);
-                            setTimeout(callBack,timeout);
+                            callBack();
                         }
                     }
                 });
@@ -164,12 +170,3 @@ pa.require=function(modList,callBack,timeout){
 window.pa=window._=pa;
 
 })(window);
-
-var _=window.pa;
-_.require(["jQuery","c-test"],function(){
-    _.debug("jQ is loading ready");
-});
-_.require(["c-test"],function(){
-    _.debug("cb already loaded");
-});
-
