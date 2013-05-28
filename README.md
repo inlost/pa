@@ -1,6 +1,6 @@
 # Pa
 
-pa是平安的简称，是中国平安金融科技研发中心的轻量级前端类库
+Pa是一个轻量级前端类库
 
 ## Getting Started
 Download the [production version][min] or the [development version][max].
@@ -11,7 +11,6 @@ Download the [production version][min] or the [development version][max].
 In your web page:
 
 ```html
-<script src="jquery.js"></script>
 <script src="dist/Pa.min.js"></script>
 <script>
 jQuery(function($) {

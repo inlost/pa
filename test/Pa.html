@@ -20,5 +20,25 @@
     <span>normal test markup</span>
     <span>awesome test markup</span>
   </div>
+  <script>
+	Pa.reg([{name:"modules",src:"../src/modules.js"}]);
+	Pa.require(["modules"],function(){
+		Pa.require(["jQuery","testStyle"],function(){
+			console.log("ok");
+		});
+	});
+	var a=_(),
+		b=_(["a",1]);
+	function c(){
+		alert("im change");
+	};
+	b.on("change",c);
+	b.on("change",function(){
+		console.log(this[0]);	
+	});
+	b.set(888,0);
+	b.off("change",c);
+	b.set(2);
+  </script>
 </body>
 </html>
