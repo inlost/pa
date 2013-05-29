@@ -57,7 +57,7 @@ var lilei=_.({
 lilei.on("change",function(){
 	this.sayAge();
 });
-lilei.set(15,age);
+lilei.set(15,"age");
 ```
 
 ### Others
