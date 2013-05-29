@@ -64,25 +64,25 @@ lilei.set(15,age);
 
 #### each:
 ```javascript
-	var arr=["a","c","e"];
-	_.each(arr,function(item,i){
-		console.log(i+":"+item);
-	});
-	//0:a   1:c   2:e
+var arr=["a","c","e"];
+_.each(arr,function(item,i){
+	console.log(i+":"+item);
+});
+//0:a   1:c   2:e
 ```
 #### has:
 ```javascript
-	var color=["red","white","orange"],
-		books=[
-			{name:"book1",price:10},
-			{name:"book2",price:14},
-		];
-		
-	console.log(_.has(color,"red");//true
-	console.log(_.has(color,"black");//false
+var color=["red","white","orange"],
+	books=[
+		{name:"book1",price:10},
+		{name:"book2",price:14},
+	];
 	
-	console.log(_.has(books,"name","book1"));//true
-	console.log(_.has(books,"price",18));//false
+console.log(_.has(color,"red");//true
+console.log(_.has(color,"black");//false
+
+console.log(_.has(books,"name","book1"));//true
+console.log(_.has(books,"price",18));//false
 ```
 
 ## Release History
