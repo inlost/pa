@@ -62,7 +62,7 @@ lilei.set(15,age);
 
 ### Others
 
-each:
+#### each:
 ```javascript
 	var arr=["a","c","e"];
 	_.each(arr,function(item,i){
@@ -70,7 +70,7 @@ each:
 	});
 	//0:a   1:c   2:e
 ```
-has:
+#### has:
 ```javascript
 	var color=["red","white","orange"],
 		books=[
