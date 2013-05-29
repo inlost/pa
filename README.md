@@ -48,14 +48,14 @@ _.require(["modules","testStyle"],function(){
 ### Watcher
 
 ```javascript
-var lilei=_.({
+var lilei=_({
 	age:14,
 	sayAge:function(){
 		alert(this.age);
 	}
 });
 lilei.on("change",function(){
-	this.sayAge();
+	this[0].sayAge();
 });
 lilei.set(15,"age");
 ```

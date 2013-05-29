@@ -27,18 +27,16 @@
 			console.log("ok");
 		});
 	});
-	var a=_(),
-		b=_(["a",1]);
-	function c(){
-		alert("im change");
-	};
-	b.on("change",c);
-	b.on("change",function(){
-		console.log(this[0]);	
-	});
-	b.set(888,0);
-	b.off("change",c);
-	b.set(2);
+var lilei=_({
+	age:14,
+	sayAge:function(){
+		alert(this.age);
+	}
+});
+lilei.on("change",function(){
+	this[0].sayAge();
+});
+lilei.set(15,"age");
   </script>
 </body>
 </html>
