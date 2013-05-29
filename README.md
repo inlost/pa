@@ -28,20 +28,29 @@ _(Coming soon)_
 ## Examples
 ### Loader
 ```javascript
-//Reg modlule without require
+//reg module without require
 Pa.reg([{name:"modules",src:"../src/modules.js"}]);
-//Reg modlule with require
+//reg module with require
 Pa.reg([{name:"modules",src:"../src/modules.js" ,require["require1","require2"……]}]);
+//or like this
+Pa.reg([ 
+	{name:"jQuery",src:"../libs/jquery/jQuery-1.9.1.js"},
+	{name:"testStyle",src:"pa_test.css",require:["jQuery"]} 
+]);
+//load modules
+_.require(["modules","testStyle"],function(){
+	console.log("all ready!");
+});
 ```
 ### Watcher
 ```javascript
-var lilei={
+var lilei=_({
 	age:14,
 	sayAge:function(){
 		alert(this.age);
 	}
-}
-_(lilei).on("change",function(){
+});
+lilei.on("change",function(){
 	this.sayAge();
 });
 lilei.set(15,age);
