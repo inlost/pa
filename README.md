@@ -78,11 +78,11 @@ lilei.set(15,age);
 			{name:"book2",price:14},
 		];
 		
-	console.log(_has(color,"red");//true
-	console.log(_has(color,"black");//false
+	console.log(_.has(color,"red");//true
+	console.log(_.has(color,"black");//false
 	
-	console.log(_has(books,"name","book1"));//true
-	console.log(_has(books,"price",18));//false
+	console.log(_.has(books,"name","book1"));//true
+	console.log(_.has(books,"price",18));//false
 ```
 
 ## Release History
