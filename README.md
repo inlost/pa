@@ -33,7 +33,7 @@ _(Coming soon)_
 //reg module without require
 Pa.reg([{name:"modules",src:"../src/modules.js"}]);
 //reg module with require
-Pa.reg([{name:"modules",src:"../src/modules.js" ,require["require1","require2"……]}]);
+Pa.reg([{name:"modules",src:"../src/modules.js" ,require:["require1","require2"……]}]);
 //or like this
 Pa.reg([ 
 	{name:"jQuery",src:"../libs/jquery/jQuery-1.9.1.js"},
