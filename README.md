@@ -88,4 +88,4 @@ console.log(_.has(books,"price",18));//false
 ## Release History
 
 ### Initial Version 1.0.0 (2013.5.29)
-* Pa的第一个版本就这么破壳而出了(●'◡'●)，hello world！
+* Pa破壳而出了(●'◡'●)，hello world！
