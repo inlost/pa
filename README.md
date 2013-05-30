@@ -1,6 +1,6 @@
 # Pa
 
-Pa是一个前端模块依赖管理和加载,数据驱动开发的前端类库，压缩后仅2.6k。可能灵活的组织开发中的JS/CSS模块文件和他们之间的依赖关系。核心由Loader和Watcher组成。
+Pa是一个前端模块依赖管理和加载,数据驱动开发的前端类库。压缩后仅2.6k，可灵活的组织开发中的JS/CSS模块文件，处理他们之间的依赖关系。核心由Loader和Watcher组成。
 
 ## Getting Started
 Download the [production version][min] or the [development version][max].
